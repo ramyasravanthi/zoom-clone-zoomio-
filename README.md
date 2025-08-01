@@ -110,13 +110,6 @@ npm start
 
 ---
 
-## 📸 Screenshots
-
-> (Add screenshots or GIFs showcasing the app interface and core features)
-> Example: Home screen, Join meeting, Active call with screen sharing, Chat interface, etc.
-
----
-
 ## ✨ Future Improvements
 
 * ✅ JWT-based authentication
@@ -124,13 +117,6 @@ npm start
 * ✅ Mute/unmute other participants (host control)
 * ✅ Deploy with HTTPS (required for WebRTC in production)
 * ✅ Add “End Call” functionality
-
----
-
-## 🔗 Live Demo
-
-> (Optional: If deployed, add the live URL here)
-> [🌐 View Demo](https://your-deployment-url.com)
 
 ---
 
@@ -148,10 +134,8 @@ This project is licensed under the *MIT License*.
 
 ---
 
-## 📝 Project Tagline (GitHub Description)
+## 📝 Project Tagline 
 
 > *A full-stack Zoom alternative using WebRTC, Socket.io, React, and Node.js. Supports real-time video calls, chat, screen sharing, and meeting history.*
 
----
 
-Let me know if you'd like this in downloadable .md format or want me to auto-generate screenshots, badges (build status, license), or Netlify/Vercel deployment section.
