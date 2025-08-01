@@ -4,7 +4,7 @@ import { Server } from "socket.io"
 let connections = {}
 let messages = {}
 let timeOnline = {}
-
+//Create the Socket.IO server with CORS settings so any frontend (from any origin) can connect.
 export const connectToSocket = (server) => {
     const io = new Server(server, {
         cors: {
@@ -27,27 +27,29 @@ export const connectToSocket = (server) => {
             }
             connections[path].push(socket.id)
 
-            timeOnline[socket.id] = new Date();
+            timeOnline[socket.id] = new Date();                                             //Add the user to the room and store their join time.
 
             // connections[path].forEach(elem => {
             //     io.to(elem)
             // })
 
             for (let a = 0; a < connections[path].length; a++) {
-                io.to(connections[path][a]).emit("user-joined", socket.id, connections[path])
+                io.to(connections[path][a]).emit("user-joined", socket.id, connections[path]) //Notify all users in the room that someone new has joined, including the full updated list of participants.
+
+
             }
 
             if (messages[path] !== undefined) {
                 for (let a = 0; a < messages[path].length; ++a) {
                     io.to(socket.id).emit("chat-message", messages[path][a]['data'],
-                        messages[path][a]['sender'], messages[path][a]['socket-id-sender'])
+                        messages[path][a]['sender'], messages[path][a]['socket-id-sender']) //If the room has old messages, send them to the new user.
                 }
             }
 
         })
 
         socket.on("signal", (toId, message) => {
-            io.to(toId).emit("signal", socket.id, message);
+            io.to(toId).emit("signal", socket.id, message);            //Pass signaling messages (offer, answer, ICE) between peers during WebRTC setup.
         })
 
         socket.on("chat-message", (data, sender) => {
@@ -60,7 +62,7 @@ export const connectToSocket = (server) => {
                         return [roomKey, true];
                     }
 
-                    return [room, isFound];
+                    return [room, isFound];                                //Find which room the sender belongs to.
 
                 }, ['', false]);
 
@@ -73,7 +75,7 @@ export const connectToSocket = (server) => {
                 console.log("message", matchingRoom, ":", sender, data)
 
                 connections[matchingRoom].forEach((elem) => {
-                    io.to(elem).emit("chat-message", data, sender, socket.id)
+                    io.to(elem).emit("chat-message", data, sender, socket.id)                 //Store the message, then broadcast it to all users in the same room.
                 })
             }
 
@@ -101,7 +103,7 @@ export const connectToSocket = (server) => {
 
 
                         if (connections[key].length === 0) {
-                            delete connections[key]
+                            delete connections[key]                           //Remove the user from the room, and notify others they left. Delete the room if it’s empty.
                         }
                     }
                 }
@@ -118,3 +120,8 @@ export const connectToSocket = (server) => {
     return io;
 }
 
+//This code:
+//Manages video call rooms and chat using Socket.IO
+//Tracks users by path (room ID)
+//Handles join-call, signal, chat-message, and disconnect
+//Broadcasts updates to all room members in real time
