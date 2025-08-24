@@ -6,15 +6,16 @@
 ---
 
 ## 🚀 Features
+ 
+- ✅ Real-time *video and audio* calls  
+- ✅ *Screen sharing* support  
+- ✅ In-call *chat* with Socket.io  
+- ✅ *Guest access* – join without signing up  
+- ✅ *Login/Signup* for registered users  
+- ✅ *Mic/Camera toggle* controls  
+- ✅ *Meeting history* for authenticated users  
+- ✅ *Responsive design* using custom CSS + Material UI  
 
-✅ Real-time *video and audio* calls
-✅ *Screen sharing* support
-✅ In-call *chat* with Socket.io
-✅ *Guest access* – join without signing up
-✅ *Login/Signup* for registered users
-✅ *Mic/Camera toggle* controls
-✅ *Meeting history* for authenticated users
-✅ *Responsive design* using custom CSS + Material UI
 
 ---
 
